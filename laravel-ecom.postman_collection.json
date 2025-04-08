@@ -40,7 +40,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"title\": \"Outdoor Gear\",\r\n  \"slug\": \"outdoor-gear\",\r\n  \"description\": \"Tents, backpacks, and tools\",\r\n  \"parent_id\": 5,\r\n  \"seq\": 2\r\n}\r\n",
+					"raw": "{\r\n  \"title\": \"New Testing\",\r\n  \"slug\": \"new-testing\",\r\n  \"description\": \"New Testing description\",\r\n  \"parent_id\": null,\r\n  \"seq\": 2\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -96,7 +96,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"title\": \"Electronics\",\r\n  \"description\": \"All kinds of electronics\",\r\n  \"image\": \"electronics.jpg\",\r\n  \"slug\": \"electronics\",\r\n  \"seq\": 1\r\n}\r\n",
+					"raw": "{\r\n  \"title\": \"New Testing\",\r\n  \"description\": \"New Testing description\",\r\n  \"image\": \"electronics.jpg\",\r\n  \"slug\": \"new-testing\",\r\n  \"seq\": 1\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -104,7 +104,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/ecom-laravel/api/categories/3",
+					"raw": "http://localhost/ecom-laravel/api/categories/16",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -113,7 +113,7 @@
 						"ecom-laravel",
 						"api",
 						"categories",
-						"3"
+						"16"
 					]
 				}
 			},
