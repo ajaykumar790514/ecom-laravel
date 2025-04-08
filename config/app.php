@@ -123,4 +123,9 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'IMGS_URL' => 'http://localhost/ecom-laravel/public/uploads/',
+    'DEFAULT_IMAGE' => 'http://localhost/ecom-laravel/public/uploads/default/',
+    'UPLOAD_PATH' => base_path('public/uploads/'),
+    'DELETE_PATH' => base_path('public/uploads/'),
+
 ];

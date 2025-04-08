@@ -20,53 +20,47 @@ class UploadImage
      * @param  int     $maxSize
      * @return string  The image path or URL.
      */
-    public static function upload(Request $request, $filename, $existingPath = null, $folder = 'default', $maxSize = 2048)
+    public static function upload($file, $folder = 'default', $existingPath = null, $maxSize = 2048)
     {
-        if ($request->hasFile($filename)) {
-            $file = $request->file($filename);
 
-            $validation = self::validateImageSize($file, $maxSize);
-            if ($validation['res'] == 'error') {
-                return $validation;
-            }
+        $validation = self::validateImageSize($file, $maxSize);
+        if ($validation['res'] == 'error') {
+            return $validation;
+        }
 
-            $allowedExtensions = ['jpg', 'jpeg', 'png', 'svg', 'avif', 'webp'];
-            $fileExtension = strtolower($file->getClientOriginalExtension());
+        $allowedExtensions = ['jpg', 'jpeg', 'png', 'svg', 'avif', 'webp'];
+        $fileExtension = strtolower($file->getClientOriginalExtension());
 
-            if (!in_array($fileExtension, $allowedExtensions)) {
-                return [
-                    'res' => 'error',
-                    'msg' => 'The file must be of type: JPG, JPEG, PNG, SVG, AVIF, or WEBP.'
-                ];
-            }
-
-            $newFilename = Str::random(10) . '.' . $file->getClientOriginalExtension();
-
-            $uploadPath = Config::get('app.UPLOAD_PATH') . $folder;
-
-            if (!File::exists($uploadPath)) {
-                File::makeDirectory($uploadPath, 0755, true);
-            }
-
-            $path = $file->move($uploadPath, $newFilename);
-
-            if ($existingPath) {
-                $existingFile = Config::get('app.DELETE_PATH') . $existingPath;
-                if (File::exists($existingFile)) {
-                    File::delete($existingFile);
-                }
-            }
-
+        if (!in_array($fileExtension, $allowedExtensions)) {
             return [
-                'res' => 'success','file_path' => $folder . '/' . $newFilename
+                'res' => 'error',
+                'msg' => 'The file must be of type: JPG, JPEG, PNG, SVG, AVIF, or WEBP.'
             ];
+        }
+
+        $newFilename = Str::random(10) . '.' . $file->getClientOriginalExtension();
+        $uploadPath = Config::get('app.UPLOAD_PATH') . $folder;
+
+        if (!File::exists($uploadPath)) {
+            File::makeDirectory($uploadPath, 0755, true);
+        }
+
+        $file->move($uploadPath, $newFilename);
+
+        if ($existingPath) {
+            $existingFile = Config::get('app.DELETE_PATH') . $existingPath;
+            if (File::exists($existingFile)) {
+                File::delete($existingFile);
+            }
         }
 
         return [
             'res' => 'success',
-            'file_path' => $existingPath ?: Config::get('app.DEFAULT_IMAGE') . 'avatar-4.jpg'
+            'file_path' => $folder . '/' . $newFilename
         ];
     }
+
+
 
     /**
      * Validate the image size and type.
